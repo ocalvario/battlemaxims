@@ -4,7 +4,7 @@ class CreateBattles < ActiveRecord::Migration[6.0]
       t.string :title
       t.string :description
       t.string :image_url
-      t.integer :country_id
+      t.belongs_to :country
 
       t.timestamps
     end
