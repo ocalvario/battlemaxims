@@ -4,7 +4,6 @@ class Api::V1::BattlesController < ApplicationController
         battles = Battle.all
         # render json: battles
         render json: BattleSerializer.new(battles)
-        
     end
 
     def create
