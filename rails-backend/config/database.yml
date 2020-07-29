@@ -23,7 +23,9 @@ default: &default
 
 development:
   <<: *default
+  host: localhost
   database: battlemaxims_development
+  adapter: postgresql
   username: 'postgres'
   password: 'postgres'
   host: localhost
