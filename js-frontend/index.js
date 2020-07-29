@@ -29,15 +29,25 @@ function createFormHandler(e) {
     const imageInput = document.querySelector('#input-url').value
     const countryInput = document.querySelector('#countries').value
     const countryId = parseInt(countryInput)
-    postBattle(titleInput, descriptionInput, imageInput, countryId)
+    let countryName 
+    switch(countryInput) {
+      case "1":
+        countryName = "Germany";
+        break;
+      case "2":
+        countryName = "Russia";
+        break;
+      case "3":
+        countryName = "Netherlands";
+        break;
+     }
+    postBattle(titleInput, descriptionInput, imageInput, countryId, countryName)
 }
 
-function postBattle(title, description, image_url, country_id) {
+function postBattle(title, description, image_url, country_id, country_name) {
     // confirm these values are coming through properly
-    // console.log(title, description, image_url, country_id);
-
-    const warData = {title, description, image_url, country_id}
-  
+    // console.log(title, description, image_url, country_id, country_name);
+    const warData = {title, description, image_url, country_id, country_name}
     fetch (endPoint, {
       // POST request
       method: 'POST',
@@ -46,11 +56,9 @@ function postBattle(title, description, image_url, country_id) {
     })
     .then(response => response.json())
     .then(battle => {
-      const battleData = battle.data
-      let newBattle = new Battle(battleData, battleData.attributes)
-          
+      let newBattle = new Battle(battle, battle, country_name)
       document.querySelector('#battle-container').innerHTML += 
-      newBattle.renderBattleCard()
+      newBattle.renderBattlePost()
 
     })
 }
