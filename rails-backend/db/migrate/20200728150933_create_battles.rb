@@ -4,7 +4,7 @@ class CreateBattles < ActiveRecord::Migration[6.0]
       t.string :title
       t.string :description
       t.string :image_url
-      t.belongs_to :country
+      t.references :country, index: true, foreign_key: true
 
       t.timestamps
     end
