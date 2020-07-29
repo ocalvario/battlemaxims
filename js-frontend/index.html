@@ -8,6 +8,32 @@
     <body>
         <div id="battle-container">
 
+            <div class="form-container">
+
+                <form id="create-battle-form" style="">
+                  <h3>Add a new battle</h3>
+              
+                  <input id='input-title' type="text" name="title" value="" placeholder="Enter your battle name..." class="input-text">
+                  <br><br>
+                  <textarea id='input-description' name="description" rows="8" cols="80" value="" placeholder="Enter your battle description..."></textarea>
+                  <br><br>
+                  <input id='input-url' type="text" name="image" value="" placeholder="Enter your battle image URL..." class="input-text">
+                  <br><br>
+              
+                  <p>Location of battle:</p>
+                  <select id="countries" name="countries">
+                    <option value="1">Germany</option>
+                    <option value="2">Russia</option>
+                    <option value="3">Netherlands</option>
+                  </select>
+                  <br><br>
+              
+                  <button id="create-button" type="submit" class="btn btn-primary">Submit</button>
+                  <br><br>
+                </form>
+              
+              </div>
+
         </div>
     </body>
 

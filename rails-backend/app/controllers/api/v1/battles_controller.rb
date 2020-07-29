@@ -18,7 +18,7 @@ class Api::V1::BattlesController < ApplicationController
     private
 
     def battle_params
-        params.require(:battle).permit(:title, :description, :image_url, :country)
+        params.require(:battle).permit(:title, :description, :image_url, :country_id)
     end
 
 end
