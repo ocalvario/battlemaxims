@@ -16,6 +16,8 @@ class Battle {
           <h3 class="title">${this.title}</h3>
           <h5>${this.country.name}</h5>
           <p class="description">${this.description}</p>
+          <button data-id=${this.id}>Edit</button>
+
         </div>
         <br><br>`;
     }
@@ -27,8 +29,13 @@ class Battle {
           <h3 class="title">${this.title}</h3>
           <h5>${this.country_name}</h5>
           <p class="description">${this.description}</p>
+          <button data-id=${this.id}>Edit</button>
         </div>
         <br><br>`;
+    }
+
+    static findById(id) {
+      return this.all.by(battle => battle.id == id);
     }
 
 }
