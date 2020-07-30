@@ -6,6 +6,11 @@ class Api::V1::BattlesController < ApplicationController
         render json: BattleSerializer.new(battles)
     end
 
+    def show
+        battle = Battle.find(params[:id])
+        render json: battle, status: 200
+    end
+
     def create
         battle = Battle.new(battle_params)
         if battle.save
@@ -14,6 +19,13 @@ class Api::V1::BattlesController < ApplicationController
             render json: {errors: battle.errors.full_messages}, status: :unprocessible_entity
         end
     end
+
+    def update
+        battle = Battle.find(params[:id])
+        battle.update(battle_params)
+        render json: battle, status:200
+    end
+
 
     private
 
