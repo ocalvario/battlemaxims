@@ -2,40 +2,51 @@
 <html lang="en" dir="ltr">
     <head>
         <meta charset="utf-8">
-        <title></title>
+        <title>Napoloenic Wars Overview</title>
         <script type="text/javascript" src="src/battle.js"></script>
         <script type="text/javascript" src="index.js"></script>
+        <link rel="stylesheet" type="text/css" href="styles/style.css">
     </head>
     <body>
         <div id="battle-container">
-
             <div class="form-container">
-
-                <form id="create-battle-form" style="">
-                  <h3>Add a new battle</h3>
+              <p><h1> <img style="center" src="https://bit.ly/3jVySjK" height="40" width="40" > The Napoleonic Wars <img style="center"  src="https://bit.ly/3jVySjK" height="40" width="40" > </h1>
+              <h2 class="subtitle">Selected Key Battles</h2>
+                <img src="https://bit.ly/33dMuBj" height="400" width="500"> <br><br>
+                <form id="create-battle-form">
+                  <h3 class="new">New Battle</h3>
               
-                  <input id='input-title' type="text" name="title" value="" placeholder="Enter your battle name..." class="input-text">
+                  <label class="new">Battle:</label> <input id='input-title' type="text" name="title" value="" placeholder="Please enter the battle's name" class="input-text">
                   <br><br>
+                  <label class="new">Key Details:</label> <br>
                   <textarea id='input-description' name="description" rows="8" cols="80" value="" placeholder="Enter your battle description..."></textarea>
                   <br><br>
-                  <input id='input-url' type="text" name="image" value="" placeholder="Enter your battle image URL..." class="input-text">
+                <label class="new">Artistic Description:</label> <input id='input-url' type="text" name="image" value="" placeholder="Enter your battle image URL..." class="input-text">
                   <br><br>
-              
-                  <p>Location of battle:</p>
+                  
+                  <label class="new">Location of Battle:</label>
                   <select id="countries" name="countries">
-                    <option value="1" class="Germany">Germany</option>
-                    <option value="2" class="Russia">Russia</option>
+                    <option value="1" class="Egypt">Egypt</option>
+                    <option value="2" class="Germany">Germany</option>
                     <option value="3" name="Netherlands">Netherlands</option>
-                  </select>
+                    <option value="4" name="Portugal">Portugal</option>
+                    <option value="5" class="Russia">Russia</option>
+                    <option value="6" name="Spain">Spain</option>
+                    
+                  </select><br><br>
+                  <img src="https://i.pinimg.com/originals/18/db/4a/18db4a5dff23d31682edfb72f6dbf71e.png" height="100" width="150">
                   <br><br>
               
-                  <button id="create-button" type="submit">Submit</button>
+                  <button id="create-button" type="submit" class="submit">Submit</button>
                   <br><br>
                 </form>
               
               </div>
-
+              <h2 class="details">Key Battle Details</h2>
         </div>
     </body>
-
+    <footer>
+      <p class="footer">® 2020 Bonaparte App</p> <br>
+      <img src="https://bit.ly/2XcWuXE" height="40" width="50">
+    </footer>
 </html>

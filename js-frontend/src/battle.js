@@ -12,11 +12,10 @@ class Battle {
      renderBattleCard() {
         return `
         <div data-id=${this.id}>
-          <img src=${this.image_url} height="200" width="250">
-          <h3>${this.title}</h3>
+          <img src=${this.image_url} height="500" width="750">
+          <h3 class="title">${this.title}</h3>
           <h5>${this.country.name}</h5>
-          <p>${this.description}</p>
-          <button data-id=${this.id}>edit</button>
+          <p class="description">${this.description}</p>
         </div>
         <br><br>`;
     }
@@ -24,11 +23,10 @@ class Battle {
     renderBattlePost() {
         return `
         <div data-id=${this.id}>
-          <img src=${this.image_url} height="200" width="250">
-          <h3>${this.title}</h3>
+        <img src=${this.image_url} height="500" width="750">
+          <h3 class="title">${this.title}</h3>
           <h5>${this.country_name}</h5>
-          <p>${this.description}</p>
-          <button data-id=${this.id}>edit</button>
+          <p class="description">${this.description}</p>
         </div>
         <br><br>`;
     }

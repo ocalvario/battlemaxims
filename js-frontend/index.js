@@ -32,14 +32,23 @@ function createFormHandler(e) {
     let countryName 
     switch(countryInput) {
       case "1":
-        countryName = "Germany";
+        countryName = "Egypt";
         break;
       case "2":
-        countryName = "Russia";
+        countryName = "Germany";
         break;
       case "3":
         countryName = "Netherlands";
         break;
+    case "4":
+      countryName = "Portugal";
+      break;
+    case "5":
+      countryName = "Russia";
+      break;
+    case "6":
+      countryName = "Spain";
+      break;
      }
     postBattle(titleInput, descriptionInput, imageInput, countryId, countryName)
 }
