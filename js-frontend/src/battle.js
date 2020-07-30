@@ -30,12 +30,50 @@ class Battle {
           <h5>${this.country_name}</h5>
           <p class="description">${this.description}</p>
           <button data-id=${this.id}>Edit</button>
+
+          <div id="update-battle">
+                
+          </div>
+
         </div>
         <br><br>`;
     }
 
     static findById(id) {
-      return this.all.by(battle => battle.id == id);
+      return this.all.find(battle => battle.id == id);
+    }
+
+    renderUpdateForm() {
+      return `
+      <form data-id=${this.id} >
+        <h3>Edit a battle:</h3>
+  
+        <label>Title</label>
+        <input id='input-title' type="text" name="title" value="${this.title}" class="input-text">
+        <br><br>
+  
+        <label>Description</label>
+        <textarea id='input-description' name="description" rows="8" cols="80" value="">${this.description}</textarea>
+        <br><br>
+  
+        <label>Image URL</label>
+        <input id='input-url' type="text" name="image" value="${this.image_url}" class="input-text">
+        <br><br>
+  
+        <label>Category</label>
+        <select id="categories" name="categories" value="${this.country.name}">
+          <option value="1">Egypt</option>
+          <option value="2">Germany</option>
+          <option value="3">Netherlands</option>
+          <option value="4">Portugal</option>
+          <option value="5">Russia</option>
+          <option value="6">Spain</option> 
+        </select>
+        <br><br>
+  
+        <input id='edit-button' type="submit" name="submit" value="Edit Syllabus" class="submit">
+      </form>
+    `;
     }
 
 }

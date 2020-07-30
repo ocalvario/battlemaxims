@@ -6,6 +6,12 @@ document.addEventListener('DOMContentLoaded', () => {
     createBattleForm = document.querySelector('#create-battle-form')
     getBody = document.querySelector('body')
     getBody.addEventListener('submit', (e) => createFormHandler(e))
+    const battleContainer = document.querySelector('#battle-container')
+    battleContainer.addEventListener('click', e => {
+      const id = parseInt(e.target.dataset.id);
+      const battle = Battle.findById(id);
+      document.querySelector('#update-battle').innerHTML = battle.renderUpdateForm();
+    });
   });
 
 function getBattles () {
@@ -40,10 +46,10 @@ function createFormHandler(e) {
       case "3":
         countryName = "Netherlands";
         break;
-    case "4":
+      case "4":
       countryName = "Portugal";
       break;
-    case "5":
+      case "5":
       countryName = "Russia";
       break;
     case "6":
