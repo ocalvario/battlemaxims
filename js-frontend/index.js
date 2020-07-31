@@ -3,15 +3,16 @@ const endPoint = "http://localhost:3000/api/v1/battles"
 document.addEventListener('DOMContentLoaded', () => {
     getBattles()
     
-    createBattleForm = document.querySelector('#create-battle-form')
-    getBody = document.querySelector('body')
-    getBody.addEventListener('submit', (e) => createFormHandler(e))
-    const battleContainer = document.querySelector('#battle-container')
-    battleContainer.addEventListener('click', e => {
+    const createBattleForm = document.querySelector('#create-battle-form')
+    // getBody = document.querySelector('body')
+    createBattleForm.addEventListener('submit', (e) => createFormHandler(e))
+    const battleDetails = document.querySelector('#battle-details')
+    battleDetails.addEventListener('click', e => {
       const id = parseInt(e.target.dataset.id);
-      const battle = Battle.findById(id);
+      const battle = Battle.all.find(battle => battle.id == id)
       document.querySelector('#update-battle').innerHTML = battle.renderUpdateForm();
     });
+    document.querySelector('#update-battle').addEventListener('submit', e => updateFormHandler(e))
   });
 
 function getBattles () {
@@ -19,17 +20,16 @@ function getBattles () {
     .then(response => response.json())
     .then( battles => {
         battles.data.forEach(battle => {
-        // debugger
         let newBattle = new Battle(battle, battle.attributes)
           
-        document.querySelector('#battle-container').innerHTML += 
+        document.querySelector('#battle-details').innerHTML += 
         newBattle.renderBattleCard()
        })
     })
 }
 
 function createFormHandler(e) {
-    e.preventDefault();
+    e.preventDefault()
     const titleInput = document.querySelector('#input-title').value
     const descriptionInput = document.querySelector('#input-description').value
     const imageInput = document.querySelector('#input-url').value
@@ -60,8 +60,6 @@ function createFormHandler(e) {
 }
 
 function postBattle(title, description, image_url, country_id, country_name) {
-    // confirm these values are coming through properly
-    // console.log(title, description, image_url, country_id, country_name);
     const warData = {title, description, image_url, country_id, country_name}
     fetch (endPoint, {
       // POST request
@@ -72,8 +70,36 @@ function postBattle(title, description, image_url, country_id, country_name) {
     .then(response => response.json())
     .then(battle => {
       let newBattle = new Battle(battle, battle, country_name)
-      document.querySelector('#battle-container').innerHTML += 
+      document.querySelector('#battle-details').innerHTML += 
       newBattle.renderBattlePost()
 
     })
 }
+
+function updateFormHandler(e) {
+  e.preventDefault();
+  const id = parseInt(e.target.dataset.id);
+  const battle = Battle.all.find(battle => battle.id == id);
+  const title = e.target.querySelector('#input-title').value;
+  const description = e.target.querySelector('#input-description').value;
+  const image_url = e.target.querySelector('#input-url').value;
+  const country_id = parseInt(e.target.querySelector('#countries').value);
+  patchSyllabus(battle, title, description, image_url, country_id)
+}
+
+function patchSyllabus(battle, title, description, image_url, country_id) {
+    const bodyJSON = { title, description, image_url, country_id }
+    fetch(`http://localhost:3000/api/v1/battles/${battle.id}`, {
+      method: 'PATCH',
+  headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    },
+    body: JSON.stringify(bodyJSON),
+  })
+    .then(res => res.json());
+    // our backend responds with the updated syllabus instance represented as JSON
+}
+
+
+

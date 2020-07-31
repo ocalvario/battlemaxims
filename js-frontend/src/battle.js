@@ -30,17 +30,8 @@ class Battle {
           <h5>${this.country_name}</h5>
           <p class="description">${this.description}</p>
           <button data-id=${this.id}>Edit</button>
-
-          <div id="update-battle">
-                
-          </div>
-
         </div>
         <br><br>`;
-    }
-
-    static findById(id) {
-      return this.all.find(battle => battle.id == id);
     }
 
     renderUpdateForm() {
@@ -61,7 +52,7 @@ class Battle {
         <br><br>
   
         <label>Category</label>
-        <select id="categories" name="categories" value="${this.country.name}">
+        <select id="countries" name="countries" value="${this.country.name}">
           <option value="1">Egypt</option>
           <option value="2">Germany</option>
           <option value="3">Netherlands</option>
@@ -71,8 +62,8 @@ class Battle {
         </select>
         <br><br>
   
-        <input id='edit-button' type="submit" name="submit" value="Edit Syllabus" class="submit">
-      </form>
+        <input id='edit-button' type="submit" name="submit" value="Edit Battle" class="submit">
+      </form><br>
     `;
     }
 
