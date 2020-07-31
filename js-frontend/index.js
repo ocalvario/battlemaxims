@@ -97,9 +97,10 @@ function patchSyllabus(battle, title, description, image_url, country_id) {
     },
     body: JSON.stringify(bodyJSON),
   })
-    .then(res => res.json());
-    // our backend responds with the updated syllabus instance represented as JSON
+    .then(res => res.json())
+    afterUpdate();  
 }
 
-
-
+function afterUpdate() {
+  window.location.reload();
+}
