@@ -2,9 +2,7 @@ const endPoint = "http://localhost:3000/api/v1/battles"
 
 document.addEventListener('DOMContentLoaded', () => {
     getBattles()
-    
     const createBattleForm = document.querySelector('#create-battle-form')
-    // getBody = document.querySelector('body')
     createBattleForm.addEventListener('submit', (e) => createFormHandler(e))
     const battleDetails = document.querySelector('#battle-details')
     battleDetails.addEventListener('click', e => {
@@ -21,7 +19,6 @@ function getBattles () {
     .then( battles => {
         battles.data.forEach(battle => {
         let newBattle = new Battle(battle, battle.attributes)
-          
         document.querySelector('#battle-details').innerHTML += 
         newBattle.renderBattleCard()
        })
@@ -35,32 +32,11 @@ function createFormHandler(e) {
     const imageInput = document.querySelector('#input-url').value
     const countryInput = document.querySelector('#countries').value
     const countryId = parseInt(countryInput)
-    let countryName 
-    switch(countryInput) {
-      case "1":
-        countryName = "Egypt";
-        break;
-      case "2":
-        countryName = "Germany";
-        break;
-      case "3":
-        countryName = "Netherlands";
-        break;
-      case "4":
-      countryName = "Portugal";
-      break;
-      case "5":
-      countryName = "Russia";
-      break;
-    case "6":
-      countryName = "Spain";
-      break;
-     }
-    postBattle(titleInput, descriptionInput, imageInput, countryId, countryName)
+    postBattle(titleInput, descriptionInput, imageInput, countryId)
 }
 
-function postBattle(title, description, image_url, country_id, country_name) {
-    const warData = {title, description, image_url, country_id, country_name}
+function postBattle(title, description, image_url, country_id) {
+    const warData = {title, description, image_url, country_id}
     fetch (endPoint, {
       // POST request
       method: 'POST',
@@ -68,12 +44,14 @@ function postBattle(title, description, image_url, country_id, country_name) {
       body: JSON.stringify(warData)
     })
     .then(response => response.json())
-    .then(battle => {
-      let newBattle = new Battle(battle, battle, country_name)
-      document.querySelector('#battle-details').innerHTML += 
-      newBattle.renderBattlePost()
-
-    })
+    .then( 
+      battle => {
+        const battleData = battle.data
+        let newBattle = new Battle(battleData, battleData.attributes)
+        document.querySelector('#battle-details').innerHTML += 
+        newBattle.renderBattleCard()
+      });
+      afterUpdate();
 }
 
 function updateFormHandler(e) {
@@ -84,23 +62,22 @@ function updateFormHandler(e) {
   const description = e.target.querySelector('#input-description').value;
   const image_url = e.target.querySelector('#input-url').value;
   const country_id = parseInt(e.target.querySelector('#countries').value);
-  patchSyllabus(battle, title, description, image_url, country_id)
+  patchBattle(battle, title, description, image_url, country_id)
 }
 
-function patchSyllabus(battle, title, description, image_url, country_id) {
+function patchBattle(battle, title, description, image_url, country_id) {
     const bodyJSON = { title, description, image_url, country_id }
     fetch(`http://localhost:3000/api/v1/battles/${battle.id}`, {
       method: 'PATCH',
   headers: {
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
+      'Content-Type': 'application/json'
     },
-    body: JSON.stringify(bodyJSON),
+    body: JSON.stringify( bodyJSON ),
   })
-    .then(res => res.json())
-    afterUpdate();  
-}
+    .then(res => res.json(),
+    getBattles(),
+    afterUpdate())}
 
 function afterUpdate() {
-  window.location.reload();
+  window.location.reload(true);
 }
