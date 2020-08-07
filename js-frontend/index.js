@@ -21,6 +21,8 @@ function getBattles () {
         let newBattle = new Battle(battle, battle.attributes)
         document.querySelector('#battle-details').innerHTML += 
         newBattle.renderBattleCard()
+           // create a new instance of the Battle class for every battle in the array from the DB (which are nested)
+        // call renderBattleCard() located in Battle class
        })
     })
 }
@@ -36,6 +38,7 @@ function createFormHandler(e) {
 }
 
 function postBattle(title, description, image_url, country_id) {
+    // build warData object outside of my fetch
     const warData = {title, description, image_url, country_id}
     fetch (endPoint, {
       // POST request
