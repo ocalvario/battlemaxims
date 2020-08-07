@@ -16,20 +16,8 @@ class Battle {
           <h3 class="title">${this.title}</h3>
           <h5>${this.country.name}</h5>
           <p class="description">${this.description}</p>
-          <button data-id=${this.id}>Edit</button>
+          <button class="edit" data-id=${this.id}>Edit</button>
 
-        </div>
-        <br><br>`;
-    }
-
-    renderBattlePost() {
-        return `
-        <div data-id=${this.id}>
-        <img src=${this.image_url} height="500" width="750">
-          <h3 class="title">${this.title}</h3>
-          <h5>${this.country_name}</h5>
-          <p class="description">${this.description}</p>
-          <button data-id=${this.id}>Edit</button>
         </div>
         <br><br>`;
     }
@@ -37,21 +25,21 @@ class Battle {
     renderUpdateForm() {
       return `
       <form data-id=${this.id} >
-        <h3>Edit a battle:</h3>
+        <h3 class="edit">Edit A Battle:</h3>
   
-        <label>Title</label>
+        <label class="edit">Title</label>
         <input id='input-title' type="text" name="title" value="${this.title}" class="input-text">
         <br><br>
   
-        <label>Description</label>
+        <label class="edit">Description</label> <br>
         <textarea id='input-description' name="description" rows="8" cols="80" value="">${this.description}</textarea>
         <br><br>
   
-        <label>Image URL</label>
+        <label class="edit">Image URL</label>
         <input id='input-url' type="text" name="image" value="${this.image_url}" class="input-text">
         <br><br>
   
-        <label>Category</label>
+        <label class="edit">Category</label>
         <select id="countries" name="countries" value="${this.country.name}">
           <option value="1">Egypt</option>
           <option value="2">Germany</option>
@@ -62,7 +50,7 @@ class Battle {
         </select>
         <br><br>
   
-        <input id='edit-button' type="submit" name="submit" value="Edit Battle" class="submit">
+        <input id='edit-button' type="submit" name="submit" value="Edit Battle" class="edit">
       </form><br>
     `;
     }
