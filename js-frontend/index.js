@@ -19,10 +19,10 @@ function getBattles () {
     .then( battles => {
         battles.data.forEach(battle => {
         let newBattle = new Battle(battle, battle.attributes)
-        document.querySelector('#battle-details').innerHTML += 
-        newBattle.renderBattleCard()
            // create a new instance of the Battle class for every battle in the array from the DB (which are nested)
+        const newBattle = new Battle(battle, battle.attributes)
         // call renderBattleCard() located in Battle class
+        document.querySelector('#battle-details').innerHTML += newBattle.renderBattleCard();
        })
     })
 }
@@ -50,7 +50,7 @@ function postBattle(title, description, image_url, country_id) {
     .then( 
       battle => {
         const battleData = battle.data
-        let newBattle = new Battle(battleData, battleData.attributes)
+        const newBattle = new Battle(battleData, battleData.attributes)
         document.querySelector('#battle-details').innerHTML += 
         newBattle.renderBattleCard()
       });
@@ -78,7 +78,6 @@ function patchBattle(battle, title, description, image_url, country_id) {
     body: JSON.stringify( bodyJSON ),
   })
     .then(res => res.json(),
-    getBattles(),
     afterUpdate())}
 
 function afterUpdate() {
