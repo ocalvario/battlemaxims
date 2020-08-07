@@ -64,3 +64,32 @@ button.submit {
   display: inline-block;
   font-size: 16px;
 }
+
+h3.edit {
+    font-variant: small-caps;
+    color: #006400;
+}
+
+label.edit {
+    color: #006400;
+    font-style: italic;
+}
+
+button.edit {
+    background-color: #039be5;
+    border: none;
+    color: white;
+    font-family: "Times New Roman";
+}
+
+input.edit {
+    background-color: #2e8b57;
+    border: none;
+    font-family: "Times New Roman";
+    color: white;
+    padding: 10px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+  }
