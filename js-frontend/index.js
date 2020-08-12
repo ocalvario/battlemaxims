@@ -118,6 +118,13 @@ function patchBattle(battle, title, description, image_url, country_id) {
     .then(res => res.json(),
     afterUpdate(),
     getBattles())}
+    .then(res => res.json())
+    .then(updatedBattle => {  
+     const battle = Battle.findById(updatedBattle.data.id);
+     battle.update(updatedBattle);
+     addBattles(); 
+    })
+    }
 
 function afterUpdate() {
   window.location.reload(true);
