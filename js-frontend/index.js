@@ -20,7 +20,27 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('#update-battle').addEventListener('submit', e => updateFormHandler(e))
   });
 
-function getBattles () {
+  function sortBattles () {
+    fetch(endPoint)
+    .then(response => response.json())
+    .then (battles => {
+      battles.data.sort(function(a, b) {
+        var nameA = a.attributes.title.toUpperCase(); // ignore upper and lowercase
+        var nameB = b.attributes.title.toUpperCase(); // ignore upper and lowercase
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+      
+        // names must be equal
+        return 0;
+      });
+      console.log(battles.data)
+    })
+
+  }
     fetch (endPoint)
     .then(response => response.json())
     .then( battles => {
