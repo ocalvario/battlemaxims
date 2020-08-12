@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   function sortBattles () {
+    document.querySelector('#battle-details').innerHTML = "";
     fetch(endPoint)
     .then(response => response.json())
     .then (battles => {
@@ -41,8 +42,13 @@ document.addEventListener('DOMContentLoaded', () => {
         // names must be equal
         return 0;
       });
-      console.log(battles.data)
-    })
+      battles.data.forEach((battle) => {
+        let newBattle = new Battle(battle, battle.attributes);
+        document.querySelector(
+          '#battle-details'
+        ).innerHTML += newBattle.renderBattleCard();
+      });
+    });
 
   }
 
@@ -128,6 +134,3 @@ function patchBattle(battle, title, description, image_url, country_id) {
       );
     }
 
-function afterUpdate() {
-  window.location.reload(true);
-}
