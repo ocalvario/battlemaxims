@@ -126,6 +126,13 @@ function patchBattle(battle, title, description, image_url, country_id) {
     })
     }
 
+    function addBattles() {
+      document.querySelector('#battle-details').innerHTML = "";
+      Battle.all.forEach(
+        battle => (document.querySelector('#battle-details').innerHTML += battle.renderBattleCard())
+      );
+    }
+
 function afterUpdate() {
   window.location.reload(true);
 }
