@@ -57,6 +57,12 @@ class Battle {
     static findById(id) {
       return this.all.find (battle => battle.id == id);
     }
+    addBattles() {
+      document.querySelector('#battle-details').innerHTML = "";
+      Battle.all.forEach(
+        battle => (document.querySelector('#battle-details').innerHTML += battle.renderBattleCard())
+      );
+    }
 }
 
 Battle.all = [];
