@@ -23,7 +23,7 @@ class Api::V1::BattlesController < ApplicationController
     def update
         battle = Battle.find(params[:id])
         battle.update(battle_params)
-        render json: battle, status:200
+        render json: BattleSerializer.new(battle), status:200
     end
 
 
