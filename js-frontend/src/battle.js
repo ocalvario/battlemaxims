@@ -1,11 +1,10 @@
 class Battle {
-    constructor(battle, battleAttributes, country_name="") {
+    constructor(battle, battleAttributes) {
         this.id = battle.id
         this.title = battleAttributes.title
         this.description = battleAttributes.description
         this.image_url = battleAttributes.image_url
         this.country = battleAttributes.country
-        this.country_name = country_name
         Battle.all.push(this)
     }
 
@@ -55,6 +54,9 @@ class Battle {
     `;
     }
 
+    static findById(id) {
+      return this.all.find (battle => battle.id == id);
+    }
 }
 
 Battle.all = [];
