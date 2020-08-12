@@ -14,7 +14,7 @@ class Api::V1::BattlesController < ApplicationController
     def create
         battle = Battle.new(battle_params)
         if battle.save
-            render json: battle, status: :accepted
+            render json: BattleSerializer.new(battle), status: :accepted
         else
             render json: {errors: battle.errors.full_messages}, status: :unprocessible_entity
         end
