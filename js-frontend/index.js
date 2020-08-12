@@ -1,7 +1,6 @@
 const endPoint = "http://localhost:3000/api/v1/battles"
 
 document.addEventListener('DOMContentLoaded', () => {
-    getBattles()
   // fetch and load battles  
   getBattles()
   // listen for 'submit' event on form and handle data
@@ -11,8 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const battleDetails = document.querySelector('#battle-details')
     battleDetails.addEventListener('click', e => {
       const id = parseInt(e.target.dataset.id);
-      const battle = Battle.all.find(battle => battle.id == id)
-      let battle = Battle.all.find(battle => battle.id == id)
+      let battle = Battle.findById(id);
       // render edit form once button is clicked
       document.querySelector('#update-battle').innerHTML = battle.renderUpdateForm();
     });
@@ -47,6 +45,8 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
   }
+
+  function getBattles () {
     fetch (endPoint)
     .then(response => response.json())
     .then( battles => {
@@ -86,8 +86,6 @@ function postBattle(title, description, image_url, country_id) {
       battle => {
         const battleData = battle.data
         const newBattle = new Battle(battleData, battleData.attributes)
-        document.querySelector('#battle-details').innerHTML += 
-        newBattle.renderBattleCard()
         // call renderBattleCard() located in Battle class
         document.querySelector('#battle-details').innerHTML += newBattle.renderBattleCard()
       });
@@ -98,7 +96,7 @@ function updateFormHandler(e) {
   e.preventDefault();
   // gathers all the input values and passes to function to execute fetch
   const id = parseInt(e.target.dataset.id);
-  const battle = Battle.all.find(battle => battle.id == id);
+  const battle = Battle.findById(id);
   const title = e.target.querySelector('#input-title').value;
   const description = e.target.querySelector('#input-description').value;
   const image_url = e.target.querySelector('#input-url').value;
@@ -115,9 +113,6 @@ function patchBattle(battle, title, description, image_url, country_id) {
     },
     body: JSON.stringify( bodyJSON ),
   })
-    .then(res => res.json(),
-    afterUpdate(),
-    getBattles())}
     .then(res => res.json())
     .then(updatedBattle => {  
      const battle = Battle.findById(updatedBattle.data.id);
