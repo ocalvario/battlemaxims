@@ -2,14 +2,21 @@ const endPoint = "http://localhost:3000/api/v1/battles"
 
 document.addEventListener('DOMContentLoaded', () => {
     getBattles()
+  // fetch and load battles  
+  getBattles()
+  // listen for 'submit' event on form and handle data
     const createBattleForm = document.querySelector('#create-battle-form')
     createBattleForm.addEventListener('submit', (e) => createFormHandler(e))
+    // listen for 'submit' event on battle details
     const battleDetails = document.querySelector('#battle-details')
     battleDetails.addEventListener('click', e => {
       const id = parseInt(e.target.dataset.id);
       const battle = Battle.all.find(battle => battle.id == id)
+      let battle = Battle.all.find(battle => battle.id == id)
+      // render edit form once button is clicked
       document.querySelector('#update-battle').innerHTML = battle.renderUpdateForm();
     });
+     // listen for the submit event of the edit form and handle the data
     document.querySelector('#update-battle').addEventListener('submit', e => updateFormHandler(e))
   });
 
@@ -17,8 +24,8 @@ function getBattles () {
     fetch (endPoint)
     .then(response => response.json())
     .then( battles => {
+        // JSON data is nested thanks to serializer, so need to access it
         battles.data.forEach(battle => {
-        let newBattle = new Battle(battle, battle.attributes)
            // create a new instance of the Battle class for every battle in the array from the DB (which are nested)
         const newBattle = new Battle(battle, battle.attributes)
         // call renderBattleCard() located in Battle class
@@ -28,7 +35,9 @@ function getBattles () {
 }
 
 function createFormHandler(e) {
+    // prevents default behavior
     e.preventDefault()
+    // gathers all the input values and passes to function to execute fetch
     const titleInput = document.querySelector('#input-title').value
     const descriptionInput = document.querySelector('#input-description').value
     const imageInput = document.querySelector('#input-url').value
@@ -40,7 +49,7 @@ function createFormHandler(e) {
 function postBattle(title, description, image_url, country_id) {
     // build warData object outside of my fetch
     const warData = {title, description, image_url, country_id}
-    fetch (endPoint, {
+    fetch ( endPoint, {
       // POST request
       method: 'POST',
       headers: {"Content-Type": "application/json"},
@@ -53,12 +62,15 @@ function postBattle(title, description, image_url, country_id) {
         const newBattle = new Battle(battleData, battleData.attributes)
         document.querySelector('#battle-details').innerHTML += 
         newBattle.renderBattleCard()
+        // call renderBattleCard() located in Battle class
+        document.querySelector('#battle-details').innerHTML += newBattle.renderBattleCard()
       });
-      afterUpdate();
 }
 
 function updateFormHandler(e) {
+  // prevents default behavior
   e.preventDefault();
+  // gathers all the input values and passes to function to execute fetch
   const id = parseInt(e.target.dataset.id);
   const battle = Battle.all.find(battle => battle.id == id);
   const title = e.target.querySelector('#input-title').value;
@@ -78,7 +90,8 @@ function patchBattle(battle, title, description, image_url, country_id) {
     body: JSON.stringify( bodyJSON ),
   })
     .then(res => res.json(),
-    afterUpdate())}
+    afterUpdate(),
+    getBattles())}
 
 function afterUpdate() {
   window.location.reload(true);
