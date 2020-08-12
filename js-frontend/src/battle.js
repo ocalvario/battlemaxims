@@ -62,14 +62,7 @@ class Battle {
       this.title = updatedBattle.data.attributes.title;
       this.description = updatedBattle.data.attributes.description;
       this.image_url = updatedBattle.data.attributes.image_url;
-      this.country_id = updatedBattle.data.attributes.country_id;
-    }
-
-    addBattles() {
-      document.querySelector('#battle-details').innerHTML = "";
-      Battle.all.forEach(
-        battle => (document.querySelector('#battle-details').innerHTML += battle.renderBattleCard())
-      );
+      this.country = updatedBattle.data.attributes.country;
     }
 }
 
