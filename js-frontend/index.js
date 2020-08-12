@@ -18,6 +18,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
      // listen for the submit event of the edit form and handle the data
     document.querySelector('#update-battle').addEventListener('submit', e => updateFormHandler(e))
+
+    const sortButton = document.querySelector('#sort-button')
+    sortButton.addEventListener('click', e => {
+      sortBattles();
+    })
+
   });
 
   function sortBattles () {
